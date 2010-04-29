@@ -15,8 +15,8 @@ class pycodegen {
 			for (int i = 0; i < n; i++) {
 				tmp[i] = extract<float>(samples[i]);
 			}
-
 			_codegen = new Codegen(tmp, (uint)n, offset);
+			free(tmp);
 		}
 
 		list getCodes() {
@@ -26,6 +26,7 @@ class pycodegen {
 			for (uint i = 0; i < numCodes; i++) {
 				ret.append(codes[i]);
 			}
+			free(codes);
 			return ret;
 		}
 
