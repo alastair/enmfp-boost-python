@@ -8,7 +8,7 @@ To compile, get a hold of the Echonest code generator and drop Codegen.h and the
 Install libboost-python and python-dev
 
     g++ -fpic -c -I/usr/include/python2.6 pycodegen.cpp
-    g++ -shared -o pycodegen.so pycodegen.o -lpython2.6 -lboost_python-mt -L. -lcodegen.Linux-64
+    g++ -shared -o pycodegen.so pycodegen.o -lpython2.6 -lboost_python -L. -lcodegen.Linux-i686
 
 Then load it up in python:
     LD_LIBRARY_PATH=. python

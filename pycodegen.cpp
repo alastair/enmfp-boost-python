@@ -21,13 +21,17 @@ class pycodegen {
 
 		list getCodes() {
 			uint numCodes = _codegen->getNumCodes();
-			long *codes = _codegen->getCodes();
+			int *codes = _codegen->getCodes();
 			list ret;
 			for (uint i = 0; i < numCodes; i++) {
 				ret.append(codes[i]);
 			}
 			free(codes);
 			return ret;
+		}
+
+		string getCodeString() {
+			return _codegen->getCodeString();
 		}
 
 		int getVersion() {
@@ -42,5 +46,6 @@ BOOST_PYTHON_MODULE(pycodegen) {
 	class_<pycodegen>("pycodegen", init<list, int>())
 		.def("getVersion", &pycodegen::getVersion)
 		.def("getCodes", &pycodegen::getCodes)
+		.def("getCodeString", &pycodegen::getCodeString)
 	;
 }
