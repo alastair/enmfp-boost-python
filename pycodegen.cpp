@@ -9,25 +9,14 @@ using namespace boost::python;
 
 class pycodegen {
 	public:
-		pycodegen(list samples, int offset) {
+		pycodegen(list samples, int offset, bool low_rank = false) {
 			std::size_t n = len(samples);
 			float* tmp = new float[n];
 			for (int i = 0; i < n; i++) {
 				tmp[i] = extract<float>(samples[i]);
 			}
-			_codegen = new Codegen(tmp, (uint)n, offset);
+			_codegen = new Codegen(tmp, (uint)n, offset, low_rank);
 			free(tmp);
-		}
-
-		list getCodes() {
-			uint numCodes = _codegen->getNumCodes();
-			int *codes = _codegen->getCodes();
-			list ret;
-			for (uint i = 0; i < numCodes; i++) {
-				ret.append(codes[i]);
-			}
-			free(codes);
-			return ret;
 		}
 
 		string getCodeString() {
@@ -45,7 +34,6 @@ class pycodegen {
 BOOST_PYTHON_MODULE(pycodegen) {
 	class_<pycodegen>("pycodegen", init<list, int>())
 		.def("getVersion", &pycodegen::getVersion)
-		.def("getCodes", &pycodegen::getCodes)
 		.def("getCodeString", &pycodegen::getCodeString)
 	;
 }
