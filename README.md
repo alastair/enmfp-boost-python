@@ -11,6 +11,7 @@ Install libboost-python and python-dev
     g++ -shared -o pycodegen.so pycodegen.o -lpython2.6 -lboost_python -L. -lcodegen.Linux-i686
 
 Then load it up in python:
+
     LD_LIBRARY_PATH=. python
     >>> import pycodegen
     >>> cg = pycodegen.pycodegen([list of samples], offset)
